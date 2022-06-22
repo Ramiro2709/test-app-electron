@@ -4,6 +4,7 @@ const path = require('path')
 
 const createWindow = () => {
   // Create the browser window.
+  // NOTE para crear ventanas
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -13,10 +14,14 @@ const createWindow = () => {
   })
 
   // and load the index.html of the app.
+  // NOTE archivo html que carga
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  // NOTE herramientas tipo inspeccionar elemento
+   mainWindow.webContents.openDevTools()
+
+   // NOTE hay un recolector de basura que esta en el tutorial pero no aca
 }
 
 // This method will be called when Electron has finished
@@ -25,6 +30,7 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow()
 
+  // NOTE listener de evento, cuando se activa la app inicia la ventana
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
