@@ -1,6 +1,8 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu } = require('electron')
 const path = require('path')
+//NOTE agregada shell
+const shell = require('electron').shell
 
 const createWindow = () => {
   // Create the browser window.
@@ -22,6 +24,42 @@ const createWindow = () => {
    mainWindow.webContents.openDevTools()
 
    // NOTE hay un recolector de basura que esta en el tutorial pero no aca
+
+   // NOTE menu:, creado objeto, especifica label, submenusito de barra de arriba
+   //      submenu: deplegable con opciones
+   var menu = Menu.buildFromTemplate([
+        {
+            label : 'Menu',
+            submenu : [
+                {
+                    label: 'Google link',
+                    // llama al shell para abrir urn externa
+                    click(){
+                        shell.openExternal('http://google.com')
+                    }
+                },
+                {type: 'separator'},
+                {
+                    label: 'Submenu3',
+                },
+                {
+                    label: 'Exit',
+                    // NOTE accion del submenu, sale
+                    click(){
+                        app.quit()
+                    }
+                },
+            ]
+        },
+        {
+            label : 'Menu2',
+        }
+
+   ])
+   Menu.setApplicationMenu(menu)
+
+   // NOTE setea el menu
+  
 }
 
 // This method will be called when Electron has finished
